@@ -42,7 +42,7 @@ export default function Album() {
         <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            이미지 목록
           </Typography>
         </Toolbar>
       </AppBar>
@@ -63,7 +63,7 @@ export default function Album() {
               color="text.primary"
               gutterBottom
             >
-              Album layout
+            이미지 목록
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
               Something short and leading about the collection below—its contents,
@@ -95,7 +95,7 @@ export default function Album() {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image="http://182.230.209.220:8826/wewt/1112.jpg"
+                    image="http://localhost:8081/1/1703213369092"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
