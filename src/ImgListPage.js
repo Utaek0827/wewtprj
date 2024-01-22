@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ImgListPage.css';
 import Button from '@mui/material/Button';
+import { useHistory } from 'react-router-dom';
 
 
 const ImgListPage = () => {
@@ -9,6 +10,8 @@ const ImgListPage = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const history = useHistory();
+
 
   function formatMillisecondString(millisecondString) {
     const dateInMillis = parseInt(millisecondString, 10);
@@ -36,6 +39,22 @@ const ImgListPage = () => {
       .catch(error => console.error('Error fetching data:', error));
   };
 
+  const delImg = (img_channame) => {
+    axios.delete("/api/" + img_channame)
+      .then(response => {
+        // 삭제 성공 시 수행할 동작
+        console.log("삭제 성공", response.data);
+        if (response.data === "삭제 완료") {
+          // 삭제가 완료되면 프로그래밍적으로 다른 경로로 이동
+          history.back('/');
+        }
+      })
+      .catch(error => {
+        // 삭제 실패 시 수행할 동작
+        console.error("삭제 실패", error);
+      });
+  };
+
   const copyToClipboard = (text) => {
     const textArea = document.createElement('textarea');
     textArea.value = text;
@@ -46,6 +65,8 @@ const ImgListPage = () => {
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 1000);
   };
+
+
 
   useEffect(() => {
     axios.get('/api/imgList/testid')
@@ -66,6 +87,7 @@ const ImgListPage = () => {
               <th>수정일</th>
               <th>폴더명</th>
               <th>이미지 url</th>
+              <th>삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -84,6 +106,9 @@ const ImgListPage = () => {
                     {`http://utimg.duckdns.org/api/${img.m_service}/${img.img_channame}`}
                   </span>
                 </td>
+                {/* <td><button onClick={delImg(img.img_channame)}>삭제</button></td> */}
+                <td><button onClick={() => delImg(img.img_channame)}>삭제</button></td>
+
               </tr>
             ))}
           </tbody>

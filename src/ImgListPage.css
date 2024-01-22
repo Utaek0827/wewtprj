@@ -32,7 +32,9 @@
   table th:nth-child(3) { width: 10%; }
   table th:nth-child(4) { width: 15%; }
   table th:nth-child(5) { width: 10%; }
-  table th:nth-child(6) { width: 30%; }
+  table th:nth-child(6) { width: 25%; }
+  table th:nth-child(7) { width: 5%; }
+
 
   th {
     border: 1px solid #000;
